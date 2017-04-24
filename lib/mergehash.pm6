@@ -12,11 +12,9 @@ augment class Hash {
                 elsif %merge-source{$key} ~~ Positional {
                     my @a;
                     for %merge-into{$key}.list {
-                        say $_;
                         @a.push: $_;
                     }
                     for %merge-source{$key}.list {
-                        say $_;
                         @a.push: $_;
                     }
                     %merge-into{$key} = @a;
@@ -26,7 +24,6 @@ augment class Hash {
                 }
             }
             else {
-                note 'source';
                 %merge-into{$key} = %merge-source{$key};
             }
         }
