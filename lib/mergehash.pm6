@@ -2,15 +2,32 @@ use MONKEY;
 augment class Hash {
     method merge (%b) {
         hashmerge self, %b;
-        self;
     }
     sub hashmerge (%merge-into, %merge-source) {
-        for %merge-source.keys {
-            if %merge-into{$_}:exists {
-                hashmerge %merge-into{$_}, %merge-source{$_};
+        for %merge-source.keys -> $key {
+            if %merge-into{$key}:exists {
+                if %merge-source{$key} ~~ Hash {
+                    hashmerge %merge-into{$key}, %merge-source{$key};
+                }
+                elsif %merge-source{$key} ~~ Positional {
+                    my @a;
+                    for %merge-into{$key}.list {
+                        say $_;
+                        @a.push: $_;
+                    }
+                    for %merge-source{$key}.list {
+                        say $_;
+                        @a.push: $_;
+                    }
+                    %merge-into{$key} = @a;
+                }
+                else {
+                    %merge-into{$key} = %merge-source{$key};
+                }
             }
             else {
-                %merge-into{$_} = %merge-source{$_};
+                note 'source';
+                %merge-into{$key} = %merge-source{$key};
             }
         }
         %merge-into;
