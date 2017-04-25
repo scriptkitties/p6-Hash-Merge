@@ -2,9 +2,9 @@
 
 ### method merge
 
-```
+```perl6
 method merge(
-    %b, 
+    %b,
     Bool:D :$no-append-array = Bool::False
 ) returns Mu
 ```
