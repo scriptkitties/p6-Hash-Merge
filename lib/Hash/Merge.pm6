@@ -15,7 +15,11 @@ augment class Hash
     #| Use :no-append-array to replace arrays and positionals instead, which will
     #| also retain the original type and not convert to an Array
     #|
-    method merge (%b; Bool:D :$no-append-array = False)
+    multi method merge (Hash:U: %b, Bool:D :$no-append-array = False) {
+        warn "Cannot merge an undefined Hash!";
+        return %b;
+    }
+    multi method merge (Hash:D: %b, Bool:D :$no-append-array = False)
     {
         hashmerge self, %b, :$no-append-array;
     }

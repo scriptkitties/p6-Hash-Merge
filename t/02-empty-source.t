@@ -4,7 +4,7 @@ use v6.c;
 use lib 'lib';
 use Test;
 
-plan 2;
+plan 3;
 
 use Hash::Merge;
 
@@ -23,6 +23,6 @@ is-deeply $empty, $hash, "Merge into empty hash";
 
 my Hash $nil;
 
-$nil.merge($hash);
 
-is-deeply $nil, $hash, "Merge into uninitialized hash";
+throws-like $nil.merge($hash), Exception, "Merge into uninitialized hash";
+is-deeply $nil.merge($hash), $hash, "Returns supplied hash if it throws";
