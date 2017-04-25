@@ -14,3 +14,12 @@ install:
 
 script: AUTHOR_TESTING=1 prove -v -e "perl6 -Ilib" t/
 
+notifications:
+  irc:
+    channels:
+      - "irc.darenet.org#scriptkitties"
+    on_success: change
+    on_failure: always
+    template:
+      - "Hash::Merge build %{result}. %{author} '%{commit_message}'"
+      - "%{build_url} %{compare_url}"
