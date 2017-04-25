@@ -1,7 +1,7 @@
 {
     "perl": "6",
     "name": "Hash::Merge",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "auth": "github:scriptkitties",
     "description": "Module to add deep merge functionality to Hashes",
     "license": "Artistic-2.0",
