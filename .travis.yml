@@ -14,3 +14,5 @@ install:
 
 script: AUTHOR_TESTING=1 prove -v -e "perl6 -Ilib" t/
 
+notifications:
+  irc: irc.darenet.org#scriptkitties
