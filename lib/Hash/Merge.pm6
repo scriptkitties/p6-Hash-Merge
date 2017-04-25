@@ -1,7 +1,7 @@
 #! /usr/bin/env false
 
 use v6.c;
-use MONKEY;
+use MONKEY-TYPING;
 
 augment class Hash
 {
