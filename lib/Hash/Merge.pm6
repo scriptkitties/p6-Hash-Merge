@@ -24,28 +24,30 @@ augment class Hash
     {
         for %merge-source.keys -> $key {
             if %merge-into{$key}:exists {
-                if %merge-source{$key} ~~ Hash {
-                    hashmerge %merge-into{$key}, %merge-source{$key}, :$no-append-array;
-                } elsif %merge-source{$key} ~~ Positional {
-                    if $no-append-array {
-                        %merge-into{$key} = %merge-source{$key};
-                    } else {
-                        my @a;
-
-                        @a.push: $_ for %merge-into{$key}.list;
-                        @a.push: $_ for %merge-source{$key}.list;
-
-                        %merge-into{$key} = @a;
+                given %merge-source{$key} {
+                    when Hash {
+                        hashmerge %merge-into{$key},
+                                  %merge-source{$key},
+                                  :$no-append-array;
                     }
-                } else {
+                    when Positional {
+                        %merge-into{$key} = $no-append-array
+                            ?? %merge-source{$key}
+                            !!
+                            do {
+                                my @a;
+                                @a.push: $_ for %merge-into{$key}.list;
+                                @a.push: $_ for %merge-source{$key}.list;
+                                @a;
+                            }
+                    }
                     # Non-positionals, so strings or Bools or whatever
-                    %merge-into{$key} = %merge-source{$key};
+                    default { %merge-into{$key} = %merge-source{$key} }
                 }
             } else {
                 %merge-into{$key} = %merge-source{$key};
             }
         }
-
         %merge-into;
     }
 }
