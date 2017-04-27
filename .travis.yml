@@ -2,8 +2,9 @@ language: perl6
 
 perl6:
   - latest
-  - "2017.03"
   - nom
+  - "2017.03"
+  - "2017.04"
 
 os:
   - linux
