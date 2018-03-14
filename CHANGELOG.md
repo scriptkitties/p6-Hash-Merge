@@ -6,4 +6,6 @@ and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Add `no precompilation` pragma ([Github#1](https://github.com/scriptkitties/p6-Hash-Merge/issues/1))
+### Added
+- `LICENSE` file for Artistic License 2.0 ([GitHub#2](https://github.com/scriptkitties/p6-Hash-Merge/issues/2))
+- `no precompilation` pragma ([GitHub#1](https://github.com/scriptkitties/p6-Hash-Merge/issues/1))
