@@ -2,7 +2,7 @@
 
 use v6.c;
 
-use Hash::Merge::Unit;
+use Hash::Merge;
 use Test;
 
 plan 2;
