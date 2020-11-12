@@ -46,9 +46,9 @@ is-deeply %a, {Z => 'new', a => 2, b => 1, y => {a => 1, z => 2}};
     %z<y><p> = (1,2,3,4);
     %y<y><p> = (5,4,6,7);
 
-    %z.merge(%y, :no-append-array);
+    %z.merge(%y, :!positional-append);
 
-    is-deeply %z,  ${:y(${:p($(5, 4, 6, 7))})}, "no-append-array (replaces the instead)";
+    is-deeply %z,  ${:y(${:p($(5, 4, 6, 7))})}, ":!positional-append makes lists overwrite";
 }
 
 done-testing;

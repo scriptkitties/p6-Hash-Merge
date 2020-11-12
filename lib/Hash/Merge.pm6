@@ -1,60 +1,76 @@
 #! /usr/bin/env false
 
-use v6.c;
+use v6.d;
 
 unit module Hash::Merge;
 
 #| Merge any number of Hashes together.
-sub merge-hashes(
-    *@hashes, #= Hashes to merge together
-    --> Hash
+sub merge-hashes (
+	*@hashes, #= Hashes to merge together
+	--> Hash
 ) is export {
-    my %merge-into = @hashes.shift;
+	my %merge-into = @hashes.shift;
 
-    # Nothing to do if we only got 1 argument
-    return %merge-into unless @hashes.elems;
+	# Nothing to do if we only got 1 argument
+	return %merge-into unless @hashes.elems;
 
-    for ^@hashes.elems {
-        %merge-into = merge-hash(%merge-into, @hashes.shift);
-    }
+	for ^@hashes.elems {
+		%merge-into = merge-hash(%merge-into, @hashes.shift);
+	}
 
-    %merge-into;
+	%merge-into;
 }
 
 #| Merge two hashes together.
-sub merge-hash(
-    %merge-into,   #= The original Hash that should be merged into.
-    %merge-source, #= Another Hash to merge into the original Hash.
-    Bool:D :$no-append-array = False,
-    --> Hash
-) is export {
-    for %merge-source.keys -> $key {
-        if %merge-into{$key}:exists {
-            given %merge-source{$key} {
-                when Hash {
-                    merge-hash(%merge-into{$key}, %merge-source{$key}, :$no-append-array);
-                }
-                when Positional {
-                    %merge-into{$key} = $no-append-array
-                    ?? %merge-source{$key}
-                    !!
-                    do {
-                        my @a;
-                        @a.push: $_ for %merge-into{$key}.list;
-                        @a.push: $_ for %merge-source{$key}.list;
-                        @a;
-                    }
-                }
-                default {
-                    %merge-into{$key} = %merge-source{$key}
-                }
-            }
-        } else {
-            %merge-into{$key} = %merge-source{$key};
-        }
-    }
+sub merge-hash (
+	#| The original Hash to merge the second Hash into.
+	%first,
 
-    %merge-into;
+	#| The second hash, which will be merged into the first Hash.
+	%second,
+
+	#| Boolean to set whether Associative objects should be merged on their
+	#| own. When set to False, Associative objects in %second will
+	#| overwrite those from %first.
+	Bool:D :$deep = True,
+
+	#| Boolean to set whether Positional objects should be appended. When
+	#| set to False, Positional objects in %second will overwrite those
+	#| from %first.
+	Bool:D :$positional-append = True,
+
+	--> Hash
+) is export {
+	my %result = %first;
+
+	for %second.keys -> $key {
+		# If the key doesn't exist yet in %first, it can be inserted without worry.
+		if (%first{$key}:!exists) {
+			%result{$key} = %second{$key};
+			next;
+		}
+
+		given (%first{$key}) {
+			# Associative objects need to be merged deeply.
+			when Associative {
+				%result{$key} = $deep
+					?? merge-hash(%first{$key}, %second{$key}, :$deep, :$positional-append)
+					!! %second{$key}
+			}
+			# Positional objects can be merged or overwritten depending on $append-array.
+			when Positional {
+				%result{$key} = $positional-append
+					?? (|%first{$key}, |%second{$key})
+					!! %second{$key}
+			}
+			# Anything else will just overwrite.
+			default {
+				%result{$key} = %second{$key};
+			}
+		}
+	}
+
+	%result;
 }
 
 # vim: ft=perl6 ts=4 sw=4 et

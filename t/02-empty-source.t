@@ -1,28 +1,22 @@
 #! /usr/bin/env perl6
 
-use v6.c;
-use lib 'lib';
-use Test;
+use v6.d;
 
-plan 3;
+use Test;
 
 use Hash::Merge::Augment;
 
-my Hash $hash = {
+plan 1;
+
+my %hash =
     a => "a",
     b => {
         c => "c"
-    }
-};
+    },
+;
 
-my Hash $empty = {};
+my %empty;
 
-$empty.merge($hash);
+%empty.merge(%hash);
 
-is-deeply $empty, $hash, "Merge into empty hash";
-
-my Hash $nil;
-
-
-throws-like $nil.merge($hash), Exception, "Merge into uninitialized hash";
-is-deeply $nil.merge($hash), $hash, "Returns supplied hash if it throws";
+is-deeply %empty, %hash, "Merge into empty hash";

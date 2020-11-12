@@ -5,6 +5,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- A `gitlab-ci.yaml` has been added to ensure tests for this module are being
+  ran when pushed to the GitLab mirror. It runs `prove6`, as well as queueing a
+  build on rakudist.raku.org.
+
+### Changed
+
+- `Hash::Merge` has been rewritten to accomodate my current knowledge on the
+  Raku programming language. This additionaly brings in a small change in the
+  merging functionality, making it so the first argument passed to `merge-hash`
+  is no longer modified itself, which could cause some awkward bugs in other
+  programs.
+
 ## [1.0.0] - 2018-03-28
 ### Added
 - `:api` key in `META6.json`
