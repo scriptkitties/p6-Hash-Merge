@@ -4,7 +4,6 @@ use v6.c;
 use MONKEY-TYPING;
 
 use Hash::Merge;
-use X::Hash::Merge::TypeObject;
 
 # Don't use precompilation in order to not conflict with other MONKEY-TYPING
 # modules.
