@@ -8,11 +8,7 @@ stages:
 
 Prove:
   stage: Test
-  except:
-    - master
   image: registry.gitlab.com/tyil/docker-perl6:debian-dev-latest
-  variables:
-    ASSIXT_TESTING_SILENT: "1"
   cache:
     key: ${CI_COMMIT_REF_NAME}
     paths:
