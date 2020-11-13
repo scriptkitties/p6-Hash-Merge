@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -21,15 +22,24 @@ Versioning](http://semver.org/spec/v2.0.0.html).
   is no longer modified itself, which could cause some awkward bugs in other
   programs.
 
+- The README has been rewritten in Pod6.
+
 ## [1.0.0] - 2018-03-28
+
 ### Added
+
 - `:api` key in `META6.json`
+
 - New `Hash::Merge` that exposes subs instead of augmenting `Hash`
 
 ### Changed
+
 - Old `Hash::Merge` functionality moved to `Hash::Merge::Augment`
 
 ## [0.2.0] - 2018-03-14
+
 ### Added
+
 - `LICENSE` file for Artistic License 2.0 ([GitHub#2](https://github.com/scriptkitties/p6-Hash-Merge/issues/2))
+
 - `no precompilation` pragma ([GitHub#1](https://github.com/scriptkitties/p6-Hash-Merge/issues/1))
