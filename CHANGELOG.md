@@ -26,6 +26,10 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 - Perl 6 references have been updated to Raku.
 
+- The main repository for this module has been moved from
+  [GitHub](https://github.com/scriptkitties/p6-Hash-Merge.git) to
+  [Sourcehut](https://git.sr.ht/~tyil/raku-hash-merge).
+
 ## [1.0.0] - 2018-03-28
 
 ### Added

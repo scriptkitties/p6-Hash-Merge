@@ -74,6 +74,7 @@ my %alpha =
 
 The module's source code is available at the following locations:
 
+=item L<https://git.sr.ht/~tyil/raku-hash-merge>
 =item L<https://gitlab.com/tyil/raku-hash-merge>
 =item L<https://github.com/scriptkitties/p6-Hash-Merge>
 
