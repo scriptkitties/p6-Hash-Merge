@@ -1,5 +1,5 @@
 {
-  "api": "1",
+  "api": "2",
   "auth": "github:scriptkitties",
   "authors": [
     "Samantha McVey <samantham@posteo.net>",
@@ -23,5 +23,5 @@
   "test-depends": [
     "Test::META"
   ],
-  "version": "1.0.0"
+  "version": "2.0.0"
 }
