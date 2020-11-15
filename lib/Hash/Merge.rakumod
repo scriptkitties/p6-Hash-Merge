@@ -75,4 +75,4 @@ sub merge-hash (
 	%result;
 }
 
-# vim: ft=perl6 ts=4 sw=4 et
+# vim: ft=raku ts=4 sw=4 et

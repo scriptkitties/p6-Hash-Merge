@@ -1,6 +1,6 @@
 #! /usr/bin/env false
 
-use v6.c;
+use v6.d;
 use MONKEY-TYPING;
 
 use Hash::Merge;
@@ -30,4 +30,4 @@ augment class Hash {
 	}
 }
 
-# vim: ft=perl6 ts=4 sw=4 et
+# vim: ft=raku ts=4 sw=4 et

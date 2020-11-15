@@ -1,4 +1,4 @@
-#! /usr/bin/env perl6
+#! /usr/bin/env raku
 
 use v6.d;
 
@@ -20,3 +20,5 @@ my %empty;
 %empty.merge(%hash);
 
 is-deeply %empty, %hash, "Merge into empty hash";
+
+# vim: ft=raku ts=4 sw=4 et

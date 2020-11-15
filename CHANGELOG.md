@@ -24,6 +24,8 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 - The README has been rewritten in Pod6.
 
+- Perl 6 references have been updated to Raku.
+
 ## [1.0.0] - 2018-03-28
 
 ### Added
