@@ -1,7 +1,7 @@
 =begin pod
 
-=NAME    Log
-=VERSION 1.0.0
+=NAME    Hash::Merge
+=VERSION 2.0.0
 =AUTHOR  Patrick Spek <p.spek+raku@tyil.nl>
 
 =head1 Description
@@ -10,26 +10,65 @@ A module for the Raku programming language to easily deep-merge two hashes.
 
 =head2 Usage
 
-	my %alpha =
-		a => 'b',
-		c => {
-			d => 'e',
-			f => 'g',
-		},
-	;
+Base usage requires you to C<use> the module, and pass two C<Hash>es to the
+imported function, C<merge-hash>.
 
-	my %beta =
-		z => 'y',
-		c => {
-			x => 'w',
-		},
-	;
+=begin code
+use Hash::Merge;
 
-	my %merged = merge-hash(%alpha, %beta);
+my %alpha =
+	a => 'b',
+	c => {
+		d => 'e',
+		f => 'g',
+	},
+;
 
-=head2 Documentation
+my %beta =
+	z => 'y',
+	c => {
+		x => 'w',
+	},
+;
 
-There's currently no extensive documentation available.
+my %merged = merge-hash(%alpha, %beta);
+=end code
+
+There are two potential options to pass to C<merge-hash>:
+
+=defn C<Bool:D :$deep = True>
+When set to C<False>, this will not deep merge the C<Hash>es. This means that
+the second C<Hash> that is passed, will I<overwrite> C<Hash> elements in the
+first C<Hash>, instead of combining them.
+
+=defn C<Bool:D :$positional-append = True>
+When set to C<False>, this will not append C<Positional> elements. This means
+that any C<Positional> elements in the second C<Hash> will I<overwrite>
+C<Positional> elements in the first C<Hash>.
+
+There is also a C<use> in this module that allows you to call C<.merge> on
+existing C<Hash> objects. This requires C<Hash::Merge::Augment>. While this is
+a fancy way to work, it will break pre-compilation of whatever module is using
+it.
+
+=begin code
+use Hash::Merge::Augment
+
+my %alpha =
+	a => 'b',
+	c => {
+		d => 'e',
+		f => 'g',
+	},
+;
+
+%alpha.merge({
+	z => 'y',
+	c => {
+		x => 'w',
+	},
+});
+=end code
 
 =head2 Contributing
 
