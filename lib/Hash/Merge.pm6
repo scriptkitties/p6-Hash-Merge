@@ -6,19 +6,21 @@ unit module Hash::Merge;
 
 #| Merge any number of Hashes together.
 sub merge-hashes (
-	*@hashes, #= Hashes to merge together
+	#| Any number of Hashes to merge together.
+	*@hashes,
+
 	--> Hash
 ) is export {
-	my %merge-into = @hashes.shift;
+	my %result = @hashes.shift;
 
 	# Nothing to do if we only got 1 argument
-	return %merge-into unless @hashes.elems;
+	return %result unless @hashes.elems;
 
 	for ^@hashes.elems {
-		%merge-into = merge-hash(%merge-into, @hashes.shift);
+		%result = merge-hash(%result, @hashes.shift);
 	}
 
-	%merge-into;
+	%result;
 }
 
 #| Merge two hashes together.
