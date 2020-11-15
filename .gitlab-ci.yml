@@ -20,14 +20,6 @@ Prove:
     - zef install --deps-only --test-depends --/test .
   script: prove6 -l
 
-RakuDist:
-  stage: Test
-  image: alpine
-  before_script:
-    - apk add --no-cache curl
-  script:
-    - curl -d thing="$CI_PROJECT_URL" -d sha="$CI_COMMIT_SHA" https://rakudist.raku.org/queue
-
 #
 # Release targets
 #
